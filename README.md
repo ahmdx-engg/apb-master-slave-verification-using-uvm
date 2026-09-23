@@ -136,46 +136,28 @@ Select **UVM 1.2** and a UVM-capable simulator, paste `design.sv` into the desig
 
 ## Results
 
-**[FILL IN: replace the placeholders below with your own run.]**
-
 **Scoreboard summary:**
 
-```
-[PASTE the scoreboard "TEST PASS COUNTS ..." block from your log]
-```
+<img width="1016" height="106" alt="image" src="https://github.com/user-attachments/assets/914377c4-7347-4fe0-bdcd-b143ad27a8f2" />
 
-**UVM report summary:** `UVM_ERROR : [n]`, `UVM_FATAL : [n]`
+
+**UVM report summary:**
+<img width="972" height="358" alt="image" src="https://github.com/user-attachments/assets/9dd7de14-0ca8-4b23-99d7-1d620e9fce08" />
+
 
 **Waveforms:**
 
-![Write phase](images/waveform_write.png)
-![Read phase](images/waveform_read.png)
+PSEL rises before PENABLE, and PREADY pulses during the access phase: PSEL, then PENABLE, PREADY pulse, address incrementing.
+<img width="975" height="221" alt="image" src="https://github.com/user-attachments/assets/3395cb2b-4738-4a6b-88ad-1a3bf7bfcac9" />
+![Write phase]
 
-Waveform observations to confirm and describe: `PSEL` rises before `PENABLE`; `PREADY` pulses in the access phase; `PRDATA` returns the value written to the same address.
+PRDATA matches the value written to the same address
+<img width="975" height="244" alt="image" src="https://github.com/user-attachments/assets/134f33dd-6c78-4776-87c5-28279b455771" />
+![Read phase]
 
-## Limitations and Future Work
-
-- The DUT does not implement `PSLVERR` or `PSTRB`, and there is no error response for addresses outside 0-31.
-- Reset is active-high in this implementation (standard APB uses active-low `PRESETn`).
-- The scoreboard compares in order using queues and does not index by address.
-- The functional coverage collector is not enabled yet.
-
-Planned improvements:
-
-- [ ] Address-indexed reference model in the scoreboard
-- [ ] Implement `PSLVERR` for out-of-range addresses and add an error-injection test
-- [ ] Add `PSTRB` byte-lane support
-- [ ] Functional coverage (read/write, address bins, back-to-back transfers)
-- [ ] SystemVerilog Assertions for APB protocol rules
-- [ ] Randomized address and operation order
-
-## Documentation
-
-A full project report is available in [`docs/PROJECT_REPORT.md`](docs/PROJECT_REPORT.md).
 
 ## Author
 
-**[Your Name]**, [Your degree / university]
-[LinkedIn URL] | [Email]
+**[Ahmed Razi Ullah]**, [NUST H12 SEECS]
 
 *Reference: ARM AMBA APB Protocol Specification; IEEE 1800.2 (UVM); Accellera UVM User Guide.*
